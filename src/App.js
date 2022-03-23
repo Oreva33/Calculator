@@ -89,7 +89,7 @@ const App = () => {
     setOnScreen((prev) => {
       const y = prev.match(/[(,),-,/,*,+]/g)
       if(y === null){
-          return Math.pow(prev, 2)
+          return Math.pow(prev, 2) +""
       } else{
           let z =[]
           for (let index = 0; index < prev.length; index++) {
@@ -119,7 +119,7 @@ const App = () => {
     setOnScreen((prev) => {
       const y = prev.match(/[(,),-,/,*,+]/g)
       if(y === null){
-          return Math.pow(prev, 2)
+          return Math.pow(prev, 0.5) + ''
       } else{
           let z =[]
           for (let index = 0; index < prev.length; index++) {

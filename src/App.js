@@ -24,6 +24,10 @@ const App = () => {
   };
 
   const noHandler2 = () => {
+    if (result === eval(onScreen)){
+      setOnScreen(result + "")
+      setresult("")
+    }else{
     setOnScreen((prev) => {
       let y = prev.split("");
       for (let index = 0; index < y.length; index++) {
@@ -48,7 +52,7 @@ const App = () => {
         setHistory([]);
       }
     });
-  };
+  }};
 
   const noHandler3 = () => {
     setOnScreen("");

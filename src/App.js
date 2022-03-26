@@ -40,7 +40,7 @@ const App = () => {
           }
         }
       try {
-          console.log(eval(y.join("")));
+          eval(y.join(""));
           setHistory((prev) => {
             return prev.concat({ one: y.join(""), two: eval(y.join("")) });
           });

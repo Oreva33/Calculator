@@ -24,35 +24,41 @@ const App = () => {
   };
 
   const noHandler2 = () => {
-    if (result === eval(onScreen)){
-      setOnScreen(result + "")
-      setresult("")
-    }else{
-    setOnScreen((prev) => {
-      let y = prev.split("");
-      for (let index = 0; index < y.length; index++) {
-        const a = "/" || "*" || "-" || "+";
-        if (y[index] === "(") {
-          if (y[index] - 1 != a) {
-            y[index] = "*(";
+    try {
+      if (result === eval(onScreen)){
+        setOnScreen(result + "")
+        setresult("")
+      }else{
+      setOnScreen((prev) => {
+        let y = prev.split("");
+        for (let index = 0; index < y.length; index++) {
+          const a = "/" || "*" || "-" || "+";
+          if (y[index] === "(") {
+            if (y[index] - 1 != a) {
+              y[index] = "*(";
+            }
           }
         }
-      }
-
       try {
-        eval(y.join(""));
-        setHistory((prev) => {
-          return prev.concat({ one: y.join(""), two: eval(y.join("")) });
-        });
-        setresult(eval(y.join("").toString()));
-        return y.join("");
-      } catch (error) {
-        setOnScreen("Error");
-        setresult("");
-        setHistory([]);
-      }
-    });
-  }};
+          console.log(eval(y.join("")));
+          setHistory((prev) => {
+            return prev.concat({ one: y.join(""), two: eval(y.join("")) });
+          });
+          setresult(eval(y.join("").toString()));
+          return y.join("");
+        } catch (error) {
+          setOnScreen("Error");
+          setresult("");
+          setHistory([]);
+        }
+      });
+    }
+    } catch (error) {
+      setOnScreen("Error");
+      setresult("");
+      setHistory([]);
+    }
+};
 
   const noHandler3 = () => {
     setOnScreen("");
@@ -232,7 +238,7 @@ return prev.concat(".")
           <button className="spec-button" onClick={noHandler1}>
             {"<--"}
           </button>
-          <button className="spec-button" onClick={noHandler10}>
+          <button className="spec-button history-size" onClick={noHandler10}>
             {"History"}
           </button>
 

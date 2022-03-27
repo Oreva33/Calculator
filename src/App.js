@@ -195,7 +195,7 @@ const App = () => {
         {history.map((x) => {
           return (
             <p className="modal-inner" key={Math.random()}>
-              <span
+              <span className="cursor"
                 onClick={() => {
                   setShow(false);
                   setOnScreen(x.one);

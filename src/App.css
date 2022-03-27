@@ -91,7 +91,8 @@ outline: none;
   color: red;
 }
 .modal-bkgrd-color {
-  color: black;}
+  color: black;
+}
 
 
 .equal-button{
@@ -99,4 +100,13 @@ outline: none;
 }
 .op-buuton{
   background-color: aquamarine;
+}
+
+.cursor{
+  cursor: pointer;
+}
+.cursor:hover{
+  background-color: rgb(215, 216, 215);
+  box-shadow: 0 3px 10px black;
+  border-radius: 5px;
 }

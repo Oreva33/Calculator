@@ -24,27 +24,37 @@ const App = () => {
   };
 
   const noHandler2 = () => {
-    try {
-      if (result === eval(onScreen)){
-        setOnScreen(result + "")
-        setresult("")
-      }else{
+    let qw = onScreen.split("");
+    for (let index = 0; index < qw.length; index++) {
+      const a = "/" || "*" || "-" || "+";
+      if (qw[index] === "(") {
+        if (!(/[/,*,-,+]/).test(qw[index-1])) {
+          qw[index] = "*(";
+        }
+      }
+    }
+    qw = eval(qw.join(""))
+    if(result === qw){
+      setOnScreen(result + "")
+       setresult("")
+       return
+    }else{
       setOnScreen((prev) => {
         let y = prev.split("");
         for (let index = 0; index < y.length; index++) {
           const a = "/" || "*" || "-" || "+";
           if (y[index] === "(") {
-            if (y[index] - 1 != a) {
+            if (!(/[/,*,-,+]/).test(qw[index-1])) {
               y[index] = "*(";
             }
           }
         }
-      try {
+        try {
           eval(y.join(""));
           setHistory((prev) => {
             return prev.concat({ one: y.join(""), two: eval(y.join("")) });
           });
-          setresult(eval(y.join("").toString()));
+          setresult(eval(y.join("")));
           return y.join("");
         } catch (error) {
           setOnScreen("Error");
@@ -53,12 +63,9 @@ const App = () => {
         }
       });
     }
-    } catch (error) {
-      setOnScreen("Error");
-      setresult("");
-      setHistory([]);
+     
     }
-};
+  
 
   const noHandler3 = () => {
     setOnScreen("");
@@ -67,92 +74,90 @@ const App = () => {
 
   const noHandler4 = () => {
     setOnScreen((prev) => {
-      const y = prev.match(/[(,),-,/,*,+]/g)
-      if(y === null){
-          return Math.pow(prev, 2)
-      } else{
-          let z =[]
-          for (let index = 0; index < prev.length; index++) {
-          for(let d = 0; d < y.length; d++){
-              if(prev[index] === y[d]){
-                  if(!z.join("").includes(index)){
-                      z.push(index)
-                  }
+      const y = prev.match(/[(,),-,/,*,+]/g);
+      if (y === null) {
+        return Math.pow(prev, 2);
+      } else {
+        let z = [];
+        for (let index = 0; index < prev.length; index++) {
+          for (let d = 0; d < y.length; d++) {
+            if (prev[index] === y[d]) {
+              if (!z.join("").includes(index)) {
+                z.push(index);
               }
+            }
           }
-          }
-          const zLastNumber = z[z.length-1]
-          const first =zLastNumber + 1
-          const f = prev.slice(first, prev[prev.length])
-          const g = prev.split("")
-          for (let index = 0; index < f.length; index++) {
-              g.pop()
-          }
-          const h = f/100
-          g.push(h+"")
-          return g.join("")
+        }
+        const zLastNumber = z[z.length - 1];
+        const first = zLastNumber + 1;
+        const f = prev.slice(first, prev[prev.length]);
+        const g = prev.split("");
+        for (let index = 0; index < f.length; index++) {
+          g.pop();
+        }
+        const h = f / 100;
+        g.push(h + "");
+        return g.join("");
       }
     });
   };
 
   const noHandler5 = () => {
     setOnScreen((prev) => {
-      const y = prev.match(/[(,),-,/,*,+]/g)
-      if(y === null){
-          return Math.pow(prev, 2) +""
-      } else{
-          let z =[]
-          for (let index = 0; index < prev.length; index++) {
-          for(let d = 0; d < y.length; d++){
-              if(prev[index] === y[d]){
-                  if(!z.join("").includes(index)){
-                      z.push(index)
-                  }
+      const y = prev.match(/[(,),-,/,*,+]/g);
+      if (y === null) {
+        return Math.pow(prev, 2) + "";
+      } else {
+        let z = [];
+        for (let index = 0; index < prev.length; index++) {
+          for (let d = 0; d < y.length; d++) {
+            if (prev[index] === y[d]) {
+              if (!z.join("").includes(index)) {
+                z.push(index);
               }
+            }
           }
-          }
-          const zLastNumber = z[z.length-1]
-          const first =zLastNumber + 1
-          const f = prev.slice(first, prev[prev.length])
-          const g = prev.split("")
-          for (let index = 0; index < f.length; index++) {
-              g.pop()
-          }
-          const h = Math.pow(f,2)
-          g.push(h+"")
-          return g.join("")
+        }
+        const zLastNumber = z[z.length - 1];
+        const first = zLastNumber + 1;
+        const f = prev.slice(first, prev[prev.length]);
+        const g = prev.split("");
+        for (let index = 0; index < f.length; index++) {
+          g.pop();
+        }
+        const h = Math.pow(f, 2);
+        g.push(h + "");
+        return g.join("");
       }
-      
     });
   };
   const noHandler6 = () => {
     setOnScreen((prev) => {
-      const y = prev.match(/[(,),-,/,*,+]/g)
-      if(y === null){
-          return Math.pow(prev, 0.5) + ''
-      } else{
-          let z =[]
-          for (let index = 0; index < prev.length; index++) {
-          for(let d = 0; d < y.length; d++){
-              if(prev[index] === y[d]){
-                  if(!z.join("").includes(index)){
-                      z.push(index)
-                  }
+      const y = prev.match(/[(,),-,/,*,+]/g);
+      if (y === null) {
+        return Math.pow(prev, 0.5) + "";
+      } else {
+        let z = [];
+        for (let index = 0; index < prev.length; index++) {
+          for (let d = 0; d < y.length; d++) {
+            if (prev[index] === y[d]) {
+              if (!z.join("").includes(index)) {
+                z.push(index);
               }
+            }
           }
-          }
-          const zLastNumber = z[z.length-1]
-          const first =zLastNumber + 1
-          const f = prev.slice(first, prev[prev.length])
-          const g = prev.split("")
-          for (let index = 0; index < f.length; index++) {
-              g.pop()
-          }
-          const h = Math.pow(f,0.5)
-          g.push(h+"")
-          return g.join("")
+        }
+        const zLastNumber = z[z.length - 1];
+        const first = zLastNumber + 1;
+        const f = prev.slice(first, prev[prev.length]);
+        const g = prev.split("");
+        for (let index = 0; index < f.length; index++) {
+          g.pop();
+        }
+        const h = Math.pow(f, 0.5);
+        g.push(h + "");
+        return g.join("");
       }
-      
     });
   };
   const noHandler7 = () => {
@@ -175,9 +180,9 @@ const App = () => {
     setShow(false);
   };
   const noHandler12 = () => {
-    setOnScreen((prev =>{
-return prev.concat(".")
-    }));
+    setOnScreen((prev) => {
+      return prev.concat(".");
+    });
   };
   let modalResult = <p className="modal-bkgrd">No calculation available</p>;
   if (history.length > 0) {
